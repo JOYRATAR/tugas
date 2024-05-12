@@ -1,0 +1,26 @@
+function int = int_trap(f, a, b, n)
+
+    h = (b - a) / n;
+    sum = 0;
+    x = a + (0:n) * h;
+    y = f(x);
+
+    int = (h / 2) * (y(1) + 2 * sum(y(2:end-1)) + y(end));
+end
+
+function I = trapezoidal_rule(f, a, b, n)
+    % Calculate the width of each trapezoid
+    h = (b - a) / n;
+    
+    % Initialize the sum to zero
+    sum = 0;
+    
+    % Calculate the sum of the areas of the trapezoids
+    for i = 1:n
+        x = a + (i - 1) * h;
+        sum = sum + 0.5 * h * (f(x) + f(x + h));
+    end
+    
+    % Return the integral estimate
+    I = sum;
+end

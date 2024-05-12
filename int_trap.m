@@ -1,8 +1,12 @@
 function int = int_trap(f, a, b, n)
 
     h = (b - a) / n;
-    x = a + (0:n) * h;
-    y = f(x);
-
-    int = (h / 2) * (y(1) + 2 * sum(y(2:end-1)) + y(end));
+    sum = 0;
+    for i = 1:n
+        x = a + (i - 1) * h;
+        sum = sum + (h/2) * (f(x) + f(x + h));
+    end
+    
+    % Return the integral estimate
+    int = sum;
 end
